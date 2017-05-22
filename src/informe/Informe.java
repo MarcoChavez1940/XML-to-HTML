@@ -28,7 +28,9 @@ public class Informe {
         
         
         Estilos estilos = new Estilos();
-        estilos.remplazarAsignatura("{LISTADO<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\">{ASIGNATURA<head><title>Notas de @NOMBRE@ @CURSO@</title></head>}ASIGNATURA<body><p style=\"font-size: 30pt\">@@</p>");
+        estilos.remplazarListado("{LISTADO<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\">{ASIGNATURA<head><title>Notas de @NOMBRE@ @CURSO@</title></head>}ASIGNATURA<body><p style=\"font-size: 30pt\">@@</p>{ASIGNATURA<head><title>Notas de @NOMBRE@ @CURSO@</title></head>}ASIGNATURA}LISTADO");
+        
+        
         
     }
     

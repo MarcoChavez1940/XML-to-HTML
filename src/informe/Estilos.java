@@ -51,19 +51,94 @@ public class Estilos {
         }
     }
     
-    public void remplazarAsignatura(String estilo){
+    //--------------------------------------------------------------------------
+    
+    public void remplazarListado(String estilo){
         int indice1, indice2;
-        String asignatura;
+        String lista, remplazado, aux;
+        int contador=0;
+        
+        indice1 = estilo.indexOf("{LISTADO");
+        
+        if(indice1 != -1){
+            indice2 = estilo.indexOf("}LISTADO");
+            
+            lista = estilo.substring(indice1, indice2+8);
+            
+            remplazado = lista;
+            
+            //Saber cuantas ocurrencias de Asignatura hay.
+            aux = remplazado;
+            while (aux.indexOf("}ASIGNATURA") > -1) {
+                aux = aux.substring(aux.indexOf(
+                "}ASIGNATURA")+11,aux.length());
+                contador++; 
+                
+            }
+            
+            
+            //REMPLAZANDO ASIGNATURAS INTERNAS
+            for(int i=0;i<contador;i++){
+                remplazado = remplazarAsignatura(remplazado);
+                
+            }
+            
+            //
+            
+            if(remplazado.indexOf("@@") != -1)
+                remplazado = remplazado.replace("@@", "Lista de notas");
+            
+            remplazado = remplazado.replace("{LISTADO", "");
+            remplazado = remplazado.replace("}LISTADO", "");
+            
+            estilo = estilo.replace(lista, remplazado);
+            System.out.println(estilo);
+            
+            
+        }
+    }
+    
+    public String remplazarAsignatura(String estilo){
+        int indice1, indice2;
+        String asignatura, remplazado;
+        
+        
         
         indice1 = estilo.indexOf("{ASIGNATURA");
         
         if(indice1 != -1){
             indice2 = estilo.indexOf("}ASIGNATURA");
             
-            asignatura = estilo.substring(indice1, (indice2+13));
+            asignatura = estilo.substring(indice1, (indice2+11));
+            remplazado = asignatura;
             
-            System.out.println(asignatura);
+            
+            /*
+                Aqui iria la validacion de las demas reglas
+            */
+                                
+            //Remplazar las reglas por los datos del XML
+            if(remplazado.indexOf("@NOMBRE@") != -1)
+                remplazado = remplazado.replaceAll("@NOMBRE@", "Marco");
+            
+            if(remplazado.indexOf("@CURSO@") != -1)
+                remplazado = remplazado.replace("@CURSO@", "TLP");
+            
+            if(remplazado.indexOf("@PLAN@") != -1)
+                remplazado = remplazado.replace("@PLAN@", listado.asignatura.plan); 
+                      
+            if(remplazado.indexOf("@@") != -1)
+                remplazado = remplazado.replace("@@", "SOYOTRO");
+            
+            remplazado = remplazado.replace("{ASIGNATURA", "");
+            remplazado = remplazado.replace("}ASIGNATURA", "");
+            
+            estilo = estilo.replace(asignatura, remplazado);
+            
+            
+            
         }
+        return estilo;
     }
 
 
